@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @Setter
 @Getter
 @Entity
@@ -18,12 +17,12 @@ public class OrderItem extends BaseEntity{
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_ID", nullable = false)
     private Order order;
 
     // primitive type 이기 때문에 ddl 은 not null 조건이 걸릴듯

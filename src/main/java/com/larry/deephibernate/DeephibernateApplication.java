@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 @SpringBootApplication
 public class DeephibernateApplication implements CommandLineRunner {
@@ -20,23 +21,16 @@ public class DeephibernateApplication implements CommandLineRunner {
     }
 
     private void logic(EntityManager em) {
-        Member member1 = new Member();
-        member1.setName("채균");
+        Delivery delivery = new Delivery();
+        OrderItem orderItem1 = new OrderItem();
+        OrderItem orderItem2 = new OrderItem();
 
-        em.persist(member1);
-        em.detach(member1);
-//        System.out.println(member1);
-//        em.merge(member1);
-//
-//        member.setAge(20);
-//
-//        Member findMember = em.find(Member.class, id);
-//        System.out.println(findMember);
-//
-//        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-//        System.out.println(members);
-//
-//        em.remove(member);
+        Order order = new Order();
+        order.setDelivery(delivery);
+        order.addOrderItem(orderItem1);
+        order.addOrderItem(orderItem2);
+
+        em.persist(order);
     }
 
     @Override
@@ -45,11 +39,9 @@ public class DeephibernateApplication implements CommandLineRunner {
         System.out.println(emf.getProperties().get("hibernate.ejb.persistenceUnitName").toString());
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-
         try {
             tx.begin();
             logic(em);
-            System.out.println("~~~~~~~~~~~~~~~~``");
             tx.commit();
         } catch (Exception e) {
             System.out.println(e);
