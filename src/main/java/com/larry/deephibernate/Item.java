@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Entity
 @Inheritance
-@Table(name = "ORDER_ITEM")
+@Table(name = "ITEMS")
 @DiscriminatorColumn
 public abstract class Item extends BaseEntity {
 
