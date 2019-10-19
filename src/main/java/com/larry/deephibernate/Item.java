@@ -12,8 +12,10 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@Inheritance
 @Table(name = "ORDER_ITEM")
-public class Item {
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity {
 
     @Id
     @GeneratedValue
